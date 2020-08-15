@@ -10,6 +10,10 @@ namespace AnotherPacman
 {
     class Hero : PictureBox
     {
+        public int Step { get; set; } = 2;
+        public int HorizontalVelocity { get; set; } = 0;
+        public int VerticalVelocity { get; set; } = 0;
+
         public Hero()
         {
             InitializeHero();
