@@ -89,18 +89,22 @@ namespace AnotherPacman
             switch (e.KeyCode)
             {
                 case Keys.Right:
+                    hero.Direction = "right";
                     hero.HorizontalVelocity = hero.Step;
                     hero.VerticalVelocity = 0;
                     break;
                 case Keys.Down:
+                    hero.Direction = "down";
                     hero.HorizontalVelocity = 0;
                     hero.VerticalVelocity = hero.Step;
                     break;
                 case Keys.Left:
+                    hero.Direction = "left";
                     hero.HorizontalVelocity = -hero.Step;
                     hero.VerticalVelocity = 0;
                     break;
                 case Keys.Up:
+                    hero.Direction = "up";
                     hero.HorizontalVelocity = 0;
                     hero.VerticalVelocity = -hero.Step;
                     break;
@@ -180,8 +184,8 @@ namespace AnotherPacman
         private void GameOver()
         {
             mainTimer.Stop();
-            labelGameOver.Parent = level;
             labelGameOver.BackColor = Color.Transparent;
+            labelGameOver.Parent = level;
             labelGameOver.Visible = true;
             labelGameOver.BringToFront();
         }

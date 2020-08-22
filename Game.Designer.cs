@@ -35,9 +35,9 @@
             // 
             this.labelGameOver.Font = new System.Drawing.Font("Ravie", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGameOver.ForeColor = System.Drawing.Color.Red;
-            this.labelGameOver.Location = new System.Drawing.Point(25, 162);
+            this.labelGameOver.Location = new System.Drawing.Point(26, 149);
             this.labelGameOver.Name = "labelGameOver";
-            this.labelGameOver.Size = new System.Drawing.Size(585, 99);
+            this.labelGameOver.Size = new System.Drawing.Size(620, 99);
             this.labelGameOver.TabIndex = 0;
             this.labelGameOver.Text = "Game Over!";
             this.labelGameOver.Visible = false;
