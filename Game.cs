@@ -12,7 +12,7 @@ namespace AnotherPacman
 {
     public partial class Game : Form
     {
-        private int initialEnemyCount = 1;
+        private int initialEnemyCount = 2;
 
         private Random rand = new Random();
         private Level level = new Level();
@@ -185,6 +185,7 @@ namespace AnotherPacman
         {
             if (hero.Bounds.IntersectsWith(food.Bounds))
             {
+                hero.Step += 1;
                 Respawnfood();
             }
         }
