@@ -43,6 +43,7 @@ namespace AnotherPacman
             string imageName = "pacman_" + this.Direction + "_" + frameCounter.ToString();
             this.Image = (Image)Properties.Resources.ResourceManager.GetObject(imageName);
             this.SizeMode = PictureBoxSizeMode.StretchImage;
+            frameCounter++;
             if (frameCounter > 4)
             {
                 frameCounter = 1;
