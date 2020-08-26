@@ -13,6 +13,7 @@ namespace AnotherPacman
     public partial class Game : Form
     {
         private int initialEnemyCount = 2;
+        private int score = 0;
 
         private Random rand = new Random();
         private Level level = new Level();
@@ -21,6 +22,7 @@ namespace AnotherPacman
         private Timer mainTimer = null;
         private Timer enemySpawningTimer = null;
         private List<Enemy> enemies = new List<Enemy>();
+
 
         public Game()
         {
@@ -40,6 +42,7 @@ namespace AnotherPacman
             AddHero();
             AddEnemies(initialEnemyCount);
             AddFood();
+            UpdateScoreLabel();
         }
 
         private void AddFood()
@@ -185,9 +188,31 @@ namespace AnotherPacman
         {
             if (hero.Bounds.IntersectsWith(food.Bounds))
             {
-                hero.Step += 1;
+                hero.Step += 0;
+                score += 200;
+                UpdateScoreLabel();
+                AnimateScore(200, food.Left, food.Top);
+                
+                if(food.Type == 4)
+                {
+                    hero.PredatorModeOn();
+                }
+                
                 Respawnfood();
             }
+        }
+
+        private void AnimateScore(int scoreValue, int x, int y)
+        {
+            Score scoreImage = new Score(scoreValue);
+            this.Controls.Add(scoreImage);
+            scoreImage.Parent = level;
+            scoreImage.Location = new Point(x, y);
+        }
+
+        private void UpdateScoreLabel()
+        {
+            ScoreLabel.Text = "Score: " + score;
         }
 
         private void Respawnfood()
@@ -222,6 +247,7 @@ namespace AnotherPacman
         private void GameOver()
         {
             mainTimer.Stop();
+            hero.Melt();
             labelGameOver.BackColor = Color.Transparent;
             labelGameOver.Parent = level;
             labelGameOver.Visible = true;
@@ -230,13 +256,27 @@ namespace AnotherPacman
 
         private void HeroEnemyColission()
         {
-            foreach (var enemy in enemies)
+            Enemy enemy;
+
+            for (int enemyCounter = 0; enemyCounter < enemies.Count; enemyCounter++)
             {
+                enemy = enemies[enemyCounter];
                 if (enemy.Bounds.IntersectsWith(hero.Bounds))
                 {
-                    GameOver();
+                    if (hero.PredatorMode == true)
+                    {
+                        AnimateScore(400, enemy.Left, enemy.Top);
+                        enemies.RemoveAt(enemyCounter);
+                        enemy.Dispose();
+                        score += 400;
+                        UpdateScoreLabel();
+                    }
+                    else
+                    {
+                        GameOver();
+                    }
                 }
-            }
+            }           
         }
     }
 }
